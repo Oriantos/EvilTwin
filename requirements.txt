@@ -1,0 +1,7 @@
+# Python dependencies for the Evil Twin attack & defense tool.
+# Everything else the tool relies on (iw, ip, iwconfig, hostapd, dnsmasq,
+# iptables) are standard Linux system utilities, not Python packages.
+
+scapy>=2.5.0     # 802.11 sniffing + frame injection (core engine)
+rich>=13.0.0     # interactive, colored terminal UI (menus, tables, live panels)
+flask>=2.0.0     # lightweight web server for the captive portal

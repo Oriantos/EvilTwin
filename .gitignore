@@ -1,0 +1,20 @@
+# Runtime output: captured credentials, logs, generated configs
+captured/*
+!captured/.gitkeep
+
+# Generated service configs written at runtime
+*.hostapd.conf
+*.dnsmasq.conf
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
